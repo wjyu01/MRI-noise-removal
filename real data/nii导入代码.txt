@@ -1,0 +1,11 @@
+将nii文件用matlab显示使用到的代码：
+1.	img = nii.img; %读取文件
+2.	[n1,n2,n3] = size(img); %读取文件的各个维度大小
+3.	imshow(img(:,:,10),[]); %预览第10个维度的图片
+4.	for i = 1:n3 
+5.	figure(i) %建立一个图形窗口,如果没有这一句则所有切片只会依次显示于一个窗口
+6.	ti = imshow(img(:,:,i),[]); 显示切片
+7.	end
+将图片转化为数据： open('nii1.fig');
+h=get(gca,'Children');
+data=get(h,'Cdata');
