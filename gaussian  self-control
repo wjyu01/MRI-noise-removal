@@ -1,0 +1,9 @@
+sigma = 30; 
+x = imread('C:\Users\sztu\Desktop\123.jpg');
+x=rgb2gray(x);
+x=double(x);
+randn('seed', 0);
+NoiseImg= x+sigma*randn(size(x));   
+figure(1); 
+subplot(121);  imshow(x,[]);  title('Clear Image')
+subplot(122),  imshow(NoiseImg,[]); title('Noise Image')
