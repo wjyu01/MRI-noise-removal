@@ -1,0 +1,5 @@
+x=imread('C:\Users\sztu\Desktop\123.jpg')
+x=rgb2gray(x);
+subplot(121),imshow(x),title('原图像');
+g=imnoise(x,'gaussian',0,0.01);
+subplot(122),imshow(g),title('添加椒盐噪声图像');
