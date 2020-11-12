@@ -5,10 +5,9 @@ global sigmas; % 输入噪声等级
 addpath(fullfile('utilities'));
 
 %输入矩阵，转换为图片格式
-flodertemp = 'denoise temp';
 for s=1:size(datass,3)
     a=datass(:,:,s);
-    imwrite(im2uint8(a),['C:\deep learning denoise\DnCNN-master\testsets\temp\',num2str(s),'.png']);
+    imwrite(im2uint8(a),['C:\deep learning denoise\DnCNN-master\testsets\temp\',num2str(s),'.png']);%存入预备处理的图像文件夹
     
 end
 
@@ -16,8 +15,8 @@ end
 folderModel = 'model';
 folderTest  = 'testsets';
 folderResult= 'results';
-imageSets   = {'BSD68','temp'};
-setTestCur  = imageSets{2};      % 当前测试的数据集
+imageSets   = {'temp'};%预备处理的图像
+setTestCur  = imageSets{1};      % 当前测试的数据集
 showResult  = 1;
 useGPU      = 0; %不使用GPU
 pauseTime   = 0;
