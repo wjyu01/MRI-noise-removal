@@ -6,7 +6,6 @@ addpath(fullfile('utilities'));
 %定义相关变量
 folderModel = 'model';
 folderTest  = 'testsets';
-folderResult= 'results';
 imageSets   = {'temp'};
 setTestCur  = imageSets{1};  % 当前测试的数据集
 showResult  = 1;
@@ -14,10 +13,10 @@ useGPU      = 0;
 pauseTime   = 0;
 
 imageNoiseSigma = 0;  % 设置加噪等级
-inputNoiseSigma = 40;  % 设置去噪等级
+inputNoiseSigma = 40; % 设置去噪等级
 
 
-
+              
 %载入模型
 load(fullfile('model','FDnCNN_gray.mat'));
 net = vl_simplenn_tidy(net);
@@ -38,12 +37,11 @@ for i=1:size(T,3)
     input = single(label+noise);
     
     
-    % 设置噪声水平图
+    % 设置噪声水平
     sigmas = inputNoiseSigma/255; 
     
     % 去噪
     res    = vl_simplenn(net,input,[],[],'conserveMemory',true,'mode','test'); % matconvnet
-    %res    = vl_ffdnet_matlab(net, input); % 如果没有安装 matconvnet 请使用这行代码，运行速度很慢 note: you should also comment net = vl_simplenn_tidy(net); and if useGPU net = vl_simplenn_move(net, 'gpu') ; end
     output = res(end).x;
     
     
