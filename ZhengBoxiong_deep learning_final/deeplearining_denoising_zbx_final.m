@@ -10,7 +10,7 @@ useGPU      = 0;
 pauseTime   = 0;
 
 imageNoiseSigma = 0;  % 设置加噪等级
-inputNoiseSigma = 40; % 设置去噪等级
+inputNoiseSigma = 0; % 设置去噪等级
 
 
               
@@ -45,7 +45,7 @@ for i=1:size(T,3)
     figure
     if showResult
         ref = (ref0(:,:,i)-minT)/(maxT-minT);
-        [PSNRCur, SSIMCur] = Cal_PSNRSSIM(ref,output,0,0);%  计算PSNR和SSIM
+        [PSNRCur, SSIMCur] = Cal_PSNRSSIM(im2uint8(ref),im2uint8(output),0,0);%  计算PSNR和SSIM
         disp([num2str(PSNRCur,'%2.2f'),'dB','    ',num2str(SSIMCur,'%2.4f')])
         imshow(cat(2, ref,label,output, output-label, output-ref),[])
         drawnow;
