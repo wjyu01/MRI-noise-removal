@@ -1,0 +1,42 @@
+mii数据在matlab中打开
+img = nii.img; ％读取文件
+[n1，n2，n3] = size（img）; ％读取文件的各个维度大小
+imshow（img（：，：，10），[]）; ％预览第10个维度的图片
+对于我= 1：n3 
+Figure（i）％建立一个图形窗口，如果没有这一句则所有切片只会依次显示在一个窗口
+ti = imshow（img（：，：，i），[]）; 显示切片
+结束
+将图片转换为数据：open（'nii1.fig'）;
+h = get（gca，'Children'）;
+data = get（h，'Cdata'）;
+
+kspace数据的读取与打包成mat
+导入h5py
+f = h5py.File（'E：/file_brain_AXFLAIR_201_6002970.h5'，'r'）
+打印（f ['kspace']。shape）
+打印（f ['ismrmrd_header']）
+将numpy导入为np
+导入matplotlib.pyplot作为plt
+将scipy.io导入为scio
+＃第一维是切片
+＃2维是线圈
+＃仅使用线圈0
+out = np.squeeze（f ['kspace'] [:, 0，：，：]）
+out = np.transpose（out，[1，2，0]）;
+对于b in out：
+        ＃打印（np.sum（b））
+        ＃plt.figure（）
+        ＃img = np.fft.ifftshift（np.fft.ifft2（b））
+        ＃plt.imshow（np.abs（img），cmap ='灰色'）
+        ＃plt.show（）
+scio.savemat（“ ksp_out.mat”，{'kspace'：out}）
+在matlab中打开
+加载（'ksp_out.mat'）
+图; imshow（（abs（ifftshift（ifft2（（kspace（：，：，3）））））））））[[））
+>>加载（'ksp_out.mat'）
+图; imshow（（abs（kspace（：，：，3））），[]）
+
+dicom文件在matlab打开
+info = dicominfo（'C：\ Users \ sztu \ Desktop \ 281.dcm'）;地址
+I = dicomread（info）;
+h = imshow（I，[0 600]）;
